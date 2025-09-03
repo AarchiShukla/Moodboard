@@ -7,6 +7,7 @@ import ImageGrid from "@/components/ImageGrid";
 import ActionButtons from "@/components/ActionButtons";
 import { useToast } from "@/hooks/use-toast";
 import creativeBackground from "@/assets/creative-background.jpg";
+import { supabase } from "@/integrations/supabase/client";
 
 // Dummy data for demonstration
 const sampleMoodboards = {
@@ -60,29 +61,40 @@ const Index = () => {
   const handleSearch = async (keyword: string) => {
     setIsGenerating(true);
     
-    // Simulate AI generation delay
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    // Use sample data based on keyword
-    const lowerKeyword = keyword.toLowerCase();
-    let moodboard;
-    
-    if (lowerKeyword.includes("minimal") || lowerKeyword.includes("modern")) {
-      moodboard = sampleMoodboards["modern minimalist"];
-    } else if (lowerKeyword.includes("nature") || lowerKeyword.includes("zen") || lowerKeyword.includes("forest")) {
-      moodboard = sampleMoodboards["nature zen"];
-    } else {
-      // Default to modern minimalist
-      moodboard = sampleMoodboards["modern minimalist"];
+    try {
+      // Call the AI-powered edge function
+      const { data, error } = await supabase.functions.invoke('generate-moodboard', {
+        body: { keyword }
+      });
+
+      if (error) {
+        console.error('Error calling generate-moodboard:', error);
+        throw new Error(error.message || 'Failed to generate moodboard');
+      }
+
+      if (data?.moodboard) {
+        setCurrentMoodboard({
+          ...data.moodboard,
+          title: data.moodboard.title || `${keyword} Moodboard`
+        });
+        
+        toast({
+          title: "AI Moodboard Generated!",
+          description: `Created "${data.moodboard.title}" for "${keyword}"`,
+        });
+      } else {
+        throw new Error('No moodboard data received');
+      }
+    } catch (error) {
+      console.error('Error generating moodboard:', error);
+      toast({
+        title: "Generation Failed",
+        description: "Please try again or check your connection",
+        variant: "destructive"
+      });
+    } finally {
+      setIsGenerating(false);
     }
-    
-    setCurrentMoodboard(moodboard);
-    setIsGenerating(false);
-    
-    toast({
-      title: "Moodboard Generated!",
-      description: `Created a beautiful moodboard for "${keyword}"`,
-    });
   };
 
   const handleShuffle = () => {
@@ -165,10 +177,10 @@ const Index = () => {
         <main className="container mx-auto px-4 py-8">
         {/* Hero Section */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-creative bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-foreground">
             Create Stunning Moodboards
           </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
+          <p className="text-xl text-foreground/80 max-w-2xl mx-auto mb-8">
             Transform your creative vision into beautiful moodboards with AI-powered design suggestions
           </p>
           
@@ -180,7 +192,7 @@ const Index = () => {
           <div className="text-center py-12">
             <div className="inline-flex items-center space-x-2">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-              <span className="text-lg font-medium">Generating your moodboard...</span>
+              <span className="text-lg font-medium text-foreground">AI is creating your moodboard...</span>
             </div>
           </div>
         )}
@@ -188,6 +200,14 @@ const Index = () => {
         {/* Generated Moodboard */}
         {currentMoodboard && !isGenerating && (
           <div className="space-y-8">
+            {/* Moodboard Title */}
+            <div className="text-center">
+              <h2 className="text-3xl font-bold text-foreground mb-2">{currentMoodboard.title}</h2>
+              <p className="text-foreground/70">
+                Keywords: {currentMoodboard.keywords?.join(", ") || "N/A"}
+              </p>
+            </div>
+            
             <div className="grid gap-8 lg:grid-cols-2">
               <ColorPalette colors={currentMoodboard.colors} />
               <FontPreviews fonts={currentMoodboard.fonts} />
@@ -214,9 +234,9 @@ const Index = () => {
             <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4">
               <span className="text-2xl">🎨</span>
             </div>
-            <h3 className="text-xl font-semibold mb-2">Ready to Create?</h3>
-            <p className="text-muted-foreground">
-              Enter a keyword above to generate your first moodboard
+            <h3 className="text-xl font-semibold mb-2 text-foreground">Ready to Create?</h3>
+            <p className="text-foreground/70">
+              Enter a keyword above to generate your first AI-powered moodboard
             </p>
           </div>
         )}

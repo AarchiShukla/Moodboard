@@ -42,21 +42,18 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
       
       {/* Quick suggestions */}
       <div className="mt-4 flex flex-wrap gap-2 justify-center">
-        <span className="text-sm text-muted-foreground">Quick ideas:</span>
-        {["Modern Minimalist", "Vintage Luxury", "Nature Zen", "Bold Creative"].map((suggestion) => (
-          <Button
-            key={suggestion}
-            variant="outline"
-            size="sm"
-            onClick={() => {
-              setKeyword(suggestion);
-              onSearch(suggestion);
-            }}
-            className="text-xs hover:bg-accent/50"
-          >
-            {suggestion}
-          </Button>
-        ))}
+        <span className="text-sm text-foreground/70">Quick idea:</span>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => {
+            setKeyword("Modern Minimalist");
+            onSearch("Modern Minimalist");
+          }}
+          className="text-xs hover:bg-accent/50"
+        >
+          Modern Minimalist
+        </Button>
       </div>
     </div>
   );
