@@ -6,6 +6,7 @@ import FontPreviews from "@/components/FontPreviews";
 import ImageGrid from "@/components/ImageGrid";
 import ActionButtons from "@/components/ActionButtons";
 import { useToast } from "@/hooks/use-toast";
+import creativeBackground from "@/assets/creative-background.jpg";
 
 // Dummy data for demonstration
 const sampleMoodboards = {
@@ -145,10 +146,23 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-subtle">
-      <Header />
+    <div 
+      className="min-h-screen relative"
+      style={{
+        backgroundImage: `url(${creativeBackground})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed'
+      }}
+    >
+      {/* Background overlay for better content readability */}
+      <div className="absolute inset-0 bg-background/90 backdrop-blur-[1px]" />
       
-      <main className="container mx-auto px-4 py-8">
+      {/* Content */}
+      <div className="relative z-10">
+        <Header />
+        
+        <main className="container mx-auto px-4 py-8">
         {/* Hero Section */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-creative bg-clip-text text-transparent">
@@ -206,7 +220,8 @@ const Index = () => {
             </p>
           </div>
         )}
-      </main>
+        </main>
+      </div>
     </div>
   );
 };
