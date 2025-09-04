@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import SearchBar from "@/components/SearchBar";
 import ColorPalette from "@/components/ColorPalette";
@@ -8,6 +9,7 @@ import ActionButtons from "@/components/ActionButtons";
 import { useToast } from "@/hooks/use-toast";
 import creativeBackground from "@/assets/creative-background.jpg";
 import { supabase } from "@/integrations/supabase/client";
+import type { User, Session } from "@supabase/supabase-js";
 
 // Dummy data for demonstration
 const sampleMoodboards = {
@@ -56,9 +58,70 @@ const sampleMoodboards = {
 const Index = () => {
   const [currentMoodboard, setCurrentMoodboard] = useState<any>(null);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+  const [session, setSession] = useState<Session | null>(null);
+  const navigate = useNavigate();
   const { toast } = useToast();
 
+  useEffect(() => {
+    // Set up auth state listener
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        setSession(session);
+        setUser(session?.user ?? null);
+      }
+    );
+
+    // Get current session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const saveMoodboard = async (moodboardData: any) => {
+    if (!user) return null;
+    
+    try {
+      const { data, error } = await supabase
+        .from('moodboards')
+        .insert({
+          user_id: user.id,
+          title: moodboardData.title,
+          keywords: moodboardData.keywords || [],
+          color_palette: moodboardData.colors || [],
+          fonts: moodboardData.fonts || [],
+          images: moodboardData.images || [],
+          is_public: false
+        })
+        .select()
+        .single();
+        
+      if (error) {
+        console.error('Error saving moodboard:', error);
+        return null;
+      }
+      
+      return data;
+    } catch (error) {
+      console.error('Error saving moodboard:', error);
+      return null;
+    }
+  };
+
   const handleSearch = async (keyword: string) => {
+    if (!user) {
+      toast({
+        title: "Authentication Required",
+        description: "Please sign in to generate moodboards",
+        variant: "destructive"
+      });
+      navigate("/auth");
+      return;
+    }
+
     setIsGenerating(true);
     
     try {
@@ -73,14 +136,22 @@ const Index = () => {
       }
 
       if (data?.moodboard) {
-        setCurrentMoodboard({
+        const moodboardData = {
           ...data.moodboard,
           title: data.moodboard.title || `${keyword} Moodboard`
-        });
+        };
+        
+        setCurrentMoodboard(moodboardData);
+        
+        // Save to database
+        const savedMoodboard = await saveMoodboard(moodboardData);
+        if (savedMoodboard) {
+          setCurrentMoodboard({ ...moodboardData, id: savedMoodboard.id });
+        }
         
         toast({
           title: "AI Moodboard Generated!",
-          description: `Created "${data.moodboard.title}" for "${keyword}"`,
+          description: `Created "${moodboardData.title}" for "${keyword}"`,
         });
       } else {
         throw new Error('No moodboard data received');
@@ -185,6 +256,14 @@ const Index = () => {
           </p>
           
           <SearchBar onSearch={handleSearch} />
+          
+          {!user && (
+            <div className="mt-6 p-4 bg-card/50 backdrop-blur-sm rounded-lg border border-border">
+              <p className="text-center text-foreground/70">
+                <strong>Sign in</strong> to generate and save your AI-powered moodboards
+              </p>
+            </div>
+          )}
         </div>
 
         {/* Loading State */}
@@ -235,9 +314,20 @@ const Index = () => {
               <span className="text-2xl">🎨</span>
             </div>
             <h3 className="text-xl font-semibold mb-2 text-foreground">Ready to Create?</h3>
-            <p className="text-foreground/70">
-              Enter a keyword above to generate your first AI-powered moodboard
+            <p className="text-foreground/70 mb-4">
+              {user 
+                ? "Enter a keyword above to generate your first AI-powered moodboard"
+                : "Sign in to start creating beautiful moodboards with AI"
+              }
             </p>
+            {!user && (
+              <button 
+                onClick={() => navigate("/auth")}
+                className="px-6 py-2 bg-gradient-primary text-white rounded-lg hover:shadow-glow transition-all duration-300"
+              >
+                Get Started
+              </button>
+            )}
           </div>
         )}
         </main>
