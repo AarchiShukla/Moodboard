@@ -18,7 +18,7 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto">
+    <div className="w-full max-w-4xl mx-auto">
       <form onSubmit={handleSubmit} className="relative">
         <div className="relative flex items-center">
           <Search className="absolute left-4 w-5 h-5 text-muted-foreground" />
@@ -41,8 +41,8 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
       </form>
       
       {/* Quick suggestions */}
-      <div className="mt-4 flex flex-wrap gap-2 justify-center">
-        <span className="text-sm text-foreground/70">Quick idea:</span>
+      <div className="mt-6 flex flex-wrap gap-2 justify-center">
+        <span className="text-sm text-foreground/70 mb-2 w-full text-center">Quick ideas:</span>
         <Button
           variant="outline"
           size="sm"
@@ -53,6 +53,61 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
           className="text-xs hover:bg-accent/50"
         >
           Modern Minimalist
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => {
+            setKeyword("Vintage Luxury");
+            onSearch("Vintage Luxury");
+          }}
+          className="text-xs hover:bg-accent/50"
+        >
+          Vintage Luxury
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => {
+            setKeyword("Nature Forest");
+            onSearch("Nature Forest");
+          }}
+          className="text-xs hover:bg-accent/50"
+        >
+          Nature Forest
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => {
+            setKeyword("Ocean Beach");
+            onSearch("Ocean Beach");
+          }}
+          className="text-xs hover:bg-accent/50"
+        >
+          Ocean Beach
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => {
+            setKeyword("Urban Industrial");
+            onSearch("Urban Industrial");
+          }}
+          className="text-xs hover:bg-accent/50"
+        >
+          Urban Industrial
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => {
+            setKeyword("Boho Chic");
+            onSearch("Boho Chic");
+          }}
+          className="text-xs hover:bg-accent/50"
+        >
+          Boho Chic
         </Button>
       </div>
     </div>
