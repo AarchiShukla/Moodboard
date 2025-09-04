@@ -57,7 +57,7 @@ Choose colors that match the aesthetic of "${keyword}". Select appropriate fonts
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'gpt-4.1-2025-04-14',
+        model: 'gpt-5-mini-2025-08-07',
         messages: [
           {
             role: 'system',
@@ -68,8 +68,7 @@ Choose colors that match the aesthetic of "${keyword}". Select appropriate fonts
             content: prompt
           }
         ],
-        max_tokens: 1500,
-        temperature: 0.7,
+        max_completion_tokens: 1500,
       }),
     });
 
