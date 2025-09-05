@@ -87,24 +87,24 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-card/80 backdrop-blur-md border-b border-border sticky top-0 z-50">
+    <header className="bg-card/95 backdrop-blur-xl border-b border-border/20 sticky top-0 z-50 shadow-luxury">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center shadow-gold animate-luxury-glow">
               <Palette className="w-5 h-5 text-primary-foreground" />
             </div>
-            <h1 className="text-xl font-bold bg-gradient-creative bg-clip-text text-transparent">
+            <h1 className="text-xl font-display font-bold text-luxury tracking-tight">
               Moodboard Generator
             </h1>
           </div>
 
           {/* Navigation */}
-          <nav className="hidden md:flex items-center space-x-6">
+          <nav className="hidden md:flex items-center space-x-8">
             <Button 
               variant="ghost" 
-              className="text-foreground hover:text-primary"
+              className="text-foreground hover:text-primary font-medium transition-luxury hover:bg-primary/5"
               onClick={() => navigate("/")}
             >
               <Home className="w-4 h-4 mr-2" />
@@ -112,11 +112,11 @@ const Header = () => {
             </Button>
             {user && (
               <>
-                <Button variant="ghost" className="text-foreground hover:text-primary">
+                <Button variant="ghost" className="text-foreground hover:text-primary font-medium transition-luxury hover:bg-primary/5">
                   <BookmarkCheck className="w-4 h-4 mr-2" />
                   My Boards
                 </Button>
-                <Button variant="ghost" className="text-foreground hover:text-primary">
+                <Button variant="ghost" className="text-foreground hover:text-primary font-medium transition-luxury hover:bg-primary/5">
                   <Download className="w-4 h-4 mr-2" />
                   Export
                 </Button>
@@ -129,44 +129,44 @@ const Header = () => {
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="relative h-10 w-10 rounded-full">
-                    <Avatar className="h-10 w-10">
+                  <Button variant="ghost" className="relative h-11 w-11 rounded-full shadow-gold hover:shadow-glow transition-luxury">
+                    <Avatar className="h-11 w-11 border-2 border-primary/20">
                       <AvatarImage src={profile?.avatar_url || ""} alt={profile?.display_name || "User"} />
-                      <AvatarFallback className="bg-gradient-primary text-primary-foreground">
+                      <AvatarFallback className="bg-gradient-primary text-primary-foreground font-display font-semibold">
                         {profile?.display_name ? profile.display_name.charAt(0).toUpperCase() : 
                          user.email ? user.email.charAt(0).toUpperCase() : 'U'}
                       </AvatarFallback>
                     </Avatar>
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56" align="end" forceMount>
-                  <div className="flex flex-col space-y-1 p-2">
-                    <p className="text-sm font-medium leading-none text-foreground">
+                <DropdownMenuContent className="w-64 bg-card/95 backdrop-blur-xl border border-border/20 shadow-luxury" align="end" forceMount>
+                  <div className="flex flex-col space-y-1 p-3">
+                    <p className="text-sm font-display font-semibold leading-none text-foreground">
                       {profile?.display_name || "User"}
                     </p>
-                    <p className="text-xs leading-none text-muted-foreground">
+                    <p className="text-xs leading-none text-muted-foreground font-medium">
                       {user.email}
                     </p>
                   </div>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem className="cursor-pointer">
+                  <DropdownMenuSeparator className="bg-border/50" />
+                  <DropdownMenuItem className="cursor-pointer hover:bg-primary/5 transition-luxury">
                     <UserIcon className="mr-2 h-4 w-4" />
-                    <span>Profile</span>
+                    <span className="font-medium">Profile</span>
                   </DropdownMenuItem>
-                  <DropdownMenuSeparator />
+                  <DropdownMenuSeparator className="bg-border/50" />
                   <DropdownMenuItem 
-                    className="cursor-pointer text-red-600 focus:text-red-600"
+                    className="cursor-pointer text-destructive hover:text-destructive hover:bg-destructive/5 transition-luxury"
                     onClick={handleSignOut}
                   >
                     <LogOut className="mr-2 h-4 w-4" />
-                    <span>Sign Out</span>
+                    <span className="font-medium">Sign Out</span>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
               <Button 
                 onClick={() => navigate("/auth")}
-                className="bg-gradient-primary hover:shadow-glow transition-all duration-300"
+                className="bg-gradient-primary hover:shadow-glow transition-luxury font-medium px-6 shadow-gold"
                 size="sm"
               >
                 Sign In
@@ -174,7 +174,7 @@ const Header = () => {
             )}
 
             {/* Mobile Menu Button */}
-            <Button variant="outline" size="sm" className="md:hidden">
+            <Button variant="outline" size="sm" className="md:hidden border-border/20 hover:bg-primary/5 transition-luxury">
               Menu
             </Button>
           </div>

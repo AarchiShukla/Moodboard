@@ -247,20 +247,20 @@ const Index = () => {
         
         <main className="container mx-auto px-4 py-8">
         {/* Hero Section */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-foreground">
+        <div className="text-center mb-16">
+          <h1 className="text-5xl md:text-7xl font-display font-bold mb-8 text-luxury tracking-tight leading-tight">
             Create Stunning Moodboards
           </h1>
-          <p className="text-xl text-foreground/80 max-w-2xl mx-auto mb-8">
+          <p className="text-xl md:text-2xl text-foreground/80 max-w-3xl mx-auto mb-12 font-medium leading-relaxed">
             Transform your creative vision into beautiful moodboards with AI-powered design suggestions
           </p>
           
           <SearchBar onSearch={handleSearch} />
           
           {!user && (
-            <div className="mt-6 p-4 bg-card/50 backdrop-blur-sm rounded-lg border border-border">
-              <p className="text-center text-foreground/70">
-                <strong>Sign in</strong> to generate and save your AI-powered moodboards
+            <div className="mt-8 p-6 bg-card/80 backdrop-blur-xl rounded-2xl border border-border/20 shadow-luxury max-w-md mx-auto">
+              <p className="text-center text-foreground/80 font-medium">
+                <strong className="text-luxury font-display">Sign in</strong> to generate and save your AI-powered moodboards
               </p>
             </div>
           )}
@@ -268,26 +268,26 @@ const Index = () => {
 
         {/* Loading State */}
         {isGenerating && (
-          <div className="text-center py-12">
-            <div className="inline-flex items-center space-x-2">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-              <span className="text-lg font-medium text-foreground">AI is creating your moodboard...</span>
+          <div className="text-center py-16">
+            <div className="inline-flex items-center space-x-3">
+              <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-primary shadow-gold"></div>
+              <span className="text-xl font-display font-medium text-foreground">AI is creating your moodboard...</span>
             </div>
           </div>
         )}
 
         {/* Generated Moodboard */}
         {currentMoodboard && !isGenerating && (
-          <div className="space-y-8">
+          <div className="space-y-12">
             {/* Moodboard Title */}
             <div className="text-center">
-              <h2 className="text-3xl font-bold text-foreground mb-2">{currentMoodboard.title}</h2>
-              <p className="text-foreground/70">
+              <h2 className="text-4xl font-display font-bold text-luxury mb-3 tracking-tight">{currentMoodboard.title}</h2>
+              <p className="text-foreground/80 text-lg font-medium">
                 Keywords: {currentMoodboard.keywords?.join(", ") || "N/A"}
               </p>
             </div>
             
-            <div className="grid gap-8 lg:grid-cols-2">
+            <div className="grid gap-12 lg:grid-cols-2">
               <ColorPalette colors={currentMoodboard.colors} />
               <FontPreviews fonts={currentMoodboard.fonts} />
             </div>
@@ -297,7 +297,7 @@ const Index = () => {
               onRefresh={handleRefreshImages}
             />
             
-            <div className="pt-8">
+            <div className="pt-12">
               <ActionButtons
                 onShuffle={handleShuffle}
                 onReplace={handleReplace}
@@ -309,12 +309,12 @@ const Index = () => {
 
         {/* Empty State */}
         {!currentMoodboard && !isGenerating && (
-          <div className="text-center py-16">
-            <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto mb-4">
-              <span className="text-2xl">🎨</span>
+          <div className="text-center py-20">
+            <div className="w-20 h-20 bg-gradient-primary rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-luxury animate-luxury-glow">
+              <span className="text-3xl">🎨</span>
             </div>
-            <h3 className="text-xl font-semibold mb-2 text-foreground">Ready to Create?</h3>
-            <p className="text-foreground/70 mb-4">
+            <h3 className="text-2xl font-display font-semibold mb-4 text-foreground tracking-tight">Ready to Create?</h3>
+            <p className="text-foreground/80 mb-8 text-lg font-medium max-w-md mx-auto">
               {user 
                 ? "Enter a keyword above to generate your first AI-powered moodboard"
                 : "Sign in to start creating beautiful moodboards with AI"
@@ -323,7 +323,7 @@ const Index = () => {
             {!user && (
               <button 
                 onClick={() => navigate("/auth")}
-                className="px-6 py-2 bg-gradient-primary text-white rounded-lg hover:shadow-glow transition-all duration-300"
+                className="px-8 py-4 bg-gradient-primary text-primary-foreground rounded-2xl hover:shadow-glow transition-luxury font-medium text-base shadow-gold"
               >
                 Get Started
               </button>

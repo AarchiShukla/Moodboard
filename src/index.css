@@ -2,111 +2,113 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Moodboard Generator Design System - Creative & Inspiring */
+/* Luxury Moodboard Generator Design System - Premium & Sophisticated */
 
 @layer base {
   :root {
-    /* Modern creative theme with purple-blue gradients */
-    --background: 251 91% 99%;
-    --foreground: 240 15% 9%;
+    /* Luxury color palette with deep sophistication */
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
 
     --card: 0 0% 100%;
-    --card-foreground: 240 15% 9%;
+    --card-foreground: 240 10% 3.9%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 240 15% 9%;
+    --popover-foreground: 240 10% 3.9%;
 
-    /* Creative purple-blue primary */
-    --primary: 259 94% 51%;
-    --primary-foreground: 0 0% 100%;
-    --primary-glow: 267 84% 81%;
+    /* Premium gold-accent primary */
+    --primary: 45 100% 51%;
+    --primary-foreground: 240 10% 3.9%;
+    --primary-glow: 45 100% 85%;
 
-    /* Soft creative secondary */
-    --secondary: 251 91% 95%;
-    --secondary-foreground: 240 15% 9%;
+    /* Sophisticated neutral secondary */
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
 
-    --muted: 251 50% 96%;
-    --muted-foreground: 240 8% 46%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
 
-    /* Creative accent */
-    --accent: 267 84% 81%;
-    --accent-foreground: 240 15% 9%;
+    /* Luxury accent - deep charcoal */
+    --accent: 240 5.9% 10%;
+    --accent-foreground: 240 4.8% 95.9%;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 251 50% 90%;
-    --input: 251 50% 90%;
-    --ring: 259 94% 51%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 45 100% 51%;
 
     --radius: 0.75rem;
 
-    /* Creative gradients and effects */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
-    --gradient-creative: linear-gradient(135deg, hsl(259 94% 51%), hsl(267 84% 81%), hsl(280 100% 70%));
+    /* Luxury gradients and effects */
+    --gradient-primary: linear-gradient(135deg, hsl(45 100% 51%), hsl(38 92% 50%), hsl(32 95% 44%));
+    --gradient-luxury: linear-gradient(135deg, hsl(240 5.9% 10%), hsl(240 3.8% 46.1%), hsl(240 4.8% 95.9%));
+    --gradient-gold: linear-gradient(135deg, hsl(45 100% 51%), hsl(45 100% 85%), hsl(45 100% 95%));
     --gradient-subtle: linear-gradient(180deg, hsl(var(--background)), hsl(var(--muted)));
+    --gradient-premium: linear-gradient(135deg, 
+      hsl(240 5.9% 10%) 0%, 
+      hsl(45 100% 51%) 50%, 
+      hsl(240 5.9% 10%) 100%);
     
-    /* Beautiful shadows */
-    --shadow-creative: 0 20px 25px -5px hsl(var(--primary) / 0.1), 0 10px 10px -5px hsl(var(--primary) / 0.04);
-    --shadow-glow: 0 0 40px hsl(var(--primary-glow) / 0.3);
-    --shadow-soft: 0 4px 6px -1px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.06);
+    /* Premium shadows with depth */
+    --shadow-luxury: 0 25px 50px -12px hsl(240 5.9% 10% / 0.25), 0 0 0 1px hsl(240 5.9% 90% / 0.05);
+    --shadow-gold: 0 20px 25px -5px hsl(45 100% 51% / 0.1), 0 0 40px hsl(45 100% 51% / 0.06);
+    --shadow-premium: 0 32px 64px -12px hsl(240 5.9% 10% / 0.14), 0 0 0 1px hsl(240 5.9% 90% / 0.1);
+    --shadow-soft: 0 4px 6px -1px hsl(240 5.9% 10% / 0.1), 0 2px 4px -1px hsl(240 5.9% 10% / 0.06);
+    --shadow-glow: 0 0 40px hsl(45 100% 51% / 0.3);
 
-    /* Animations */
+    /* Smooth premium animations */
+    --transition-luxury: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 45 100% 51%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 45 100% 51%;
+    --primary-foreground: 240 10% 3.9%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 45 100% 51%;
+
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-primary: 45 100% 51%;
+    --sidebar-primary-foreground: 240 10% 3.9%;
     --sidebar-accent: 240 3.7% 15.9%;
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 45 100% 51%;
   }
 }
 
@@ -116,6 +118,35 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-inter;
+    font-feature-settings: "cv11", "ss01";
+    font-optical-sizing: auto;
+  }
+
+  /* Premium typography classes */
+  .font-display {
+    font-family: 'Playfair Display', serif;
+    font-optical-sizing: auto;
+    font-feature-settings: "liga" 1;
+  }
+
+  .font-body {
+    font-family: 'Inter', sans-serif;
+    font-feature-settings: "cv11", "ss01";
+    font-optical-sizing: auto;
+  }
+
+  .font-accent {
+    font-family: 'Cormorant Garamond', serif;
+    font-feature-settings: "liga" 1;
+  }
+
+  /* Premium text styles */
+  .text-luxury {
+    @apply bg-gradient-primary bg-clip-text text-transparent;
+  }
+
+  .text-premium {
+    @apply text-accent font-display;
   }
 }

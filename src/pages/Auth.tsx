@@ -156,49 +156,49 @@ const Auth = () => {
       }}
     >
       {/* Background overlay */}
-      <div className="absolute inset-0 bg-background/90 backdrop-blur-[1px]" />
+      <div className="absolute inset-0 bg-background/95 backdrop-blur-sm" />
       
-      <div className="relative z-10 w-full max-w-md mx-auto p-4">
-        <div className="text-center mb-8">
-          <div className="flex items-center justify-center mb-4">
-            <div className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center">
-              <Palette className="w-6 h-6 text-white" />
+      <div className="relative z-10 w-full max-w-lg mx-auto p-6">
+        <div className="text-center mb-10">
+          <div className="flex items-center justify-center mb-6">
+            <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center shadow-luxury animate-luxury-glow">
+              <Palette className="w-8 h-8 text-primary-foreground" />
             </div>
           </div>
-          <h1 className="text-3xl font-bold text-foreground mb-2">Welcome to Moodboards</h1>
-          <p className="text-foreground/70">Create and share beautiful AI-powered moodboards</p>
+          <h1 className="text-4xl font-display font-bold text-luxury mb-3 tracking-tight">Welcome to Moodboards</h1>
+          <p className="text-lg text-foreground/80 font-medium">Create and share beautiful AI-powered moodboards</p>
         </div>
 
-        <Card className="bg-card/80 backdrop-blur-sm border-2">
-          <CardHeader className="text-center">
-            <CardTitle className="text-2xl text-foreground">Get Started</CardTitle>
-            <CardDescription className="text-foreground/70">
+        <Card className="bg-card/90 backdrop-blur-xl border-2 border-border/20 shadow-luxury rounded-2xl overflow-hidden">
+          <CardHeader className="text-center pb-6 bg-gradient-subtle">
+            <CardTitle className="text-2xl font-display font-bold text-foreground tracking-tight">Get Started</CardTitle>
+            <CardDescription className="text-foreground/70 text-base font-medium">
               Sign in to your account or create a new one
             </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-6">
             <Tabs defaultValue="signin" className="w-full">
-              <TabsList className="grid w-full grid-cols-2 mb-6">
-                <TabsTrigger value="signin">Sign In</TabsTrigger>
-                <TabsTrigger value="signup">Sign Up</TabsTrigger>
+              <TabsList className="grid w-full grid-cols-2 mb-8 bg-muted/50 border border-border/20 rounded-xl p-1">
+                <TabsTrigger value="signin" className="font-medium transition-luxury data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-gold rounded-lg">Sign In</TabsTrigger>
+                <TabsTrigger value="signup" className="font-medium transition-luxury data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-gold rounded-lg">Sign Up</TabsTrigger>
               </TabsList>
               
               <TabsContent value="signin">
-                <form onSubmit={handleSignIn} className="space-y-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="signin-email" className="text-foreground">Email</Label>
+                <form onSubmit={handleSignIn} className="space-y-6">
+                  <div className="space-y-3">
+                    <Label htmlFor="signin-email" className="text-foreground font-medium text-sm">Email Address</Label>
                     <Input
                       id="signin-email"
                       type="email"
-                      placeholder="Enter your email"
+                      placeholder="Enter your email address"
                       value={formData.email}
                       onChange={(e) => handleInputChange("email", e.target.value)}
-                      className="bg-background/50"
+                      className="bg-background/50 border-border/30 focus:border-primary transition-luxury h-12 rounded-xl"
                       required
                     />
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="signin-password" className="text-foreground">Password</Label>
+                  <div className="space-y-3">
+                    <Label htmlFor="signin-password" className="text-foreground font-medium text-sm">Password</Label>
                     <div className="relative">
                       <Input
                         id="signin-password"
@@ -206,14 +206,14 @@ const Auth = () => {
                         placeholder="Enter your password"
                         value={formData.password}
                         onChange={(e) => handleInputChange("password", e.target.value)}
-                        className="bg-background/50 pr-10"
+                        className="bg-background/50 border-border/30 focus:border-primary transition-luxury h-12 rounded-xl pr-12"
                         required
                       />
                       <Button
                         type="button"
                         variant="ghost"
                         size="sm"
-                        className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
+                        className="absolute right-0 top-0 h-full px-4 hover:bg-transparent"
                         onClick={() => setShowPassword(!showPassword)}
                       >
                         {showPassword ? (
@@ -226,7 +226,7 @@ const Auth = () => {
                   </div>
                   <Button 
                     type="submit" 
-                    className="w-full bg-gradient-primary hover:shadow-glow transition-all duration-300"
+                    className="w-full bg-gradient-primary hover:shadow-glow transition-luxury h-12 font-medium text-base rounded-xl shadow-gold"
                     disabled={loading}
                   >
                     {loading ? "Signing In..." : "Sign In"}
@@ -235,9 +235,9 @@ const Auth = () => {
               </TabsContent>
               
               <TabsContent value="signup">
-                <form onSubmit={handleSignUp} className="space-y-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="signup-name" className="text-foreground">Display Name</Label>
+                <form onSubmit={handleSignUp} className="space-y-6">
+                  <div className="space-y-3">
+                    <Label htmlFor="signup-name" className="text-foreground font-medium text-sm">Display Name</Label>
                     <Input
                       id="signup-name"
                       type="text"
@@ -290,7 +290,7 @@ const Auth = () => {
                   </div>
                   <Button 
                     type="submit" 
-                    className="w-full bg-gradient-primary hover:shadow-glow transition-all duration-300"
+                    className="w-full bg-gradient-primary hover:shadow-glow transition-luxury h-12 font-medium text-base rounded-xl shadow-gold"
                     disabled={loading}
                   >
                     {loading ? "Creating Account..." : "Create Account"}
@@ -301,11 +301,11 @@ const Auth = () => {
           </CardContent>
         </Card>
 
-        <div className="text-center mt-6">
+        <div className="text-center mt-8">
           <Button 
             variant="ghost" 
             onClick={() => navigate("/")}
-            className="text-foreground/70 hover:text-foreground"
+            className="text-foreground/70 hover:text-foreground font-medium transition-luxury hover:bg-primary/5 px-6 py-2 rounded-xl"
           >
             ← Back to Home
           </Button>

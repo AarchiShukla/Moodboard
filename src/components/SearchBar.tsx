@@ -18,31 +18,31 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto">
-      <form onSubmit={handleSubmit} className="relative">
+    <div className="w-full max-w-5xl mx-auto">
+      <form onSubmit={handleSubmit} className="relative group">
         <div className="relative flex items-center">
-          <Search className="absolute left-4 w-5 h-5 text-muted-foreground" />
+          <Search className="absolute left-6 w-6 h-6 text-muted-foreground group-focus-within:text-primary transition-luxury" />
           <Input
             type="text"
             placeholder="Enter keywords for your moodboard (e.g., 'modern minimalist', 'vintage luxury', 'forest nature')..."
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
-            className="pl-12 pr-32 h-14 text-lg bg-card/50 backdrop-blur-sm border-2 focus:border-primary shadow-soft"
+            className="pl-16 pr-40 h-16 text-lg bg-card/80 backdrop-blur-xl border-2 border-border/20 focus:border-primary shadow-luxury rounded-2xl font-medium placeholder:text-muted-foreground/60 transition-luxury"
           />
           <Button
             type="submit"
             size="lg"
-            className="absolute right-2 bg-gradient-primary hover:shadow-glow transition-all duration-300"
+            className="absolute right-3 bg-gradient-primary hover:shadow-glow transition-luxury h-12 px-8 font-medium rounded-xl shadow-gold"
           >
-            <Sparkles className="w-4 h-4 mr-2" />
+            <Sparkles className="w-5 h-5 mr-2" />
             Generate
           </Button>
         </div>
       </form>
       
       {/* Quick suggestions */}
-      <div className="mt-6 flex flex-wrap gap-2 justify-center">
-        <span className="text-sm text-foreground/70 mb-2 w-full text-center">Quick ideas:</span>
+      <div className="mt-8 flex flex-wrap gap-3 justify-center">
+        <span className="text-sm font-display font-medium text-foreground/80 mb-3 w-full text-center">Quick Inspiration:</span>
         <Button
           variant="outline"
           size="sm"
@@ -50,7 +50,7 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
             setKeyword("Modern Minimalist");
             onSearch("Modern Minimalist");
           }}
-          className="text-xs hover:bg-accent/50"
+          className="text-sm hover:bg-primary/5 border-border/30 rounded-xl px-4 py-2 font-medium transition-luxury hover:border-primary/50"
         >
           Modern Minimalist
         </Button>
@@ -61,7 +61,7 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
             setKeyword("Vintage Luxury");
             onSearch("Vintage Luxury");
           }}
-          className="text-xs hover:bg-accent/50"
+          className="text-sm hover:bg-primary/5 border-border/30 rounded-xl px-4 py-2 font-medium transition-luxury hover:border-primary/50"
         >
           Vintage Luxury
         </Button>
@@ -72,7 +72,7 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
             setKeyword("Nature Forest");
             onSearch("Nature Forest");
           }}
-          className="text-xs hover:bg-accent/50"
+          className="text-sm hover:bg-primary/5 border-border/30 rounded-xl px-4 py-2 font-medium transition-luxury hover:border-primary/50"
         >
           Nature Forest
         </Button>
@@ -83,7 +83,7 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
             setKeyword("Ocean Beach");
             onSearch("Ocean Beach");
           }}
-          className="text-xs hover:bg-accent/50"
+          className="text-sm hover:bg-primary/5 border-border/30 rounded-xl px-4 py-2 font-medium transition-luxury hover:border-primary/50"
         >
           Ocean Beach
         </Button>
@@ -94,7 +94,7 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
             setKeyword("Urban Industrial");
             onSearch("Urban Industrial");
           }}
-          className="text-xs hover:bg-accent/50"
+          className="text-sm hover:bg-primary/5 border-border/30 rounded-xl px-4 py-2 font-medium transition-luxury hover:border-primary/50"
         >
           Urban Industrial
         </Button>
@@ -105,7 +105,7 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
             setKeyword("Boho Chic");
             onSearch("Boho Chic");
           }}
-          className="text-xs hover:bg-accent/50"
+          className="text-sm hover:bg-primary/5 border-border/30 rounded-xl px-4 py-2 font-medium transition-luxury hover:border-primary/50"
         >
           Boho Chic
         </Button>
