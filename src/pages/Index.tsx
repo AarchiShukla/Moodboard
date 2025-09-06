@@ -7,7 +7,7 @@ import FontPreviews from "@/components/FontPreviews";
 import ImageGrid from "@/components/ImageGrid";
 import ActionButtons from "@/components/ActionButtons";
 import { useToast } from "@/hooks/use-toast";
-import creativeBackground from "@/assets/creative-background.jpg";
+
 import { supabase } from "@/integrations/supabase/client";
 import type { User, Session } from "@supabase/supabase-js";
 
@@ -230,16 +230,8 @@ const Index = () => {
 
   return (
     <div 
-      className="min-h-screen relative"
-      style={{
-        backgroundImage: `url(${creativeBackground})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed'
-      }}
+      className="min-h-screen relative bg-gradient-subtle"
     >
-      {/* Background overlay for better content readability */}
-      <div className="absolute inset-0 bg-background/90 backdrop-blur-[1px]" />
       
       {/* Content */}
       <div className="relative z-10">

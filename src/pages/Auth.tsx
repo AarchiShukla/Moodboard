@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { Palette, Eye, EyeOff } from "lucide-react";
-import creativeBackground from "@/assets/creative-background.jpg";
+
 
 const Auth = () => {
   const [loading, setLoading] = useState(false);
@@ -147,16 +147,8 @@ const Auth = () => {
 
   return (
     <div 
-      className="min-h-screen flex items-center justify-center relative"
-      style={{
-        backgroundImage: `url(${creativeBackground})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed'
-      }}
+      className="min-h-screen flex items-center justify-center relative bg-gradient-subtle"
     >
-      {/* Background overlay */}
-      <div className="absolute inset-0 bg-background/95 backdrop-blur-sm" />
       
       <div className="relative z-10 w-full max-w-lg mx-auto p-6">
         <div className="text-center mb-10">
