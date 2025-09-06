@@ -78,11 +78,27 @@ const Auth = () => {
           });
         }
       } else {
-        toast({
-          title: "Account Created!",
-          description: "Please check your email to verify your account.",
+        // Auto sign-in immediately after signup
+        const { error: signInError } = await supabase.auth.signInWithPassword({
+          email: formData.email,
+          password: formData.password,
         });
-        navigate("/");
+
+        if (signInError) {
+          toast({
+            title: "Sign In Error",
+            description: signInError.message.includes("Email not confirmed")
+              ? "Email confirmation is required. Disable it in Supabase settings to allow instant login, or verify your email."
+              : signInError.message,
+            variant: "destructive",
+          });
+        } else {
+          toast({
+            title: "Welcome!",
+            description: "Your account is ready.",
+          });
+          navigate("/");
+        }
       }
     } catch (error) {
       toast({
